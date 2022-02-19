@@ -28,11 +28,14 @@
         top: 1.5em;
         left: 2.5em;
       }
+      .poster {
+        max-height: 300px;
+      }
     </style> <!-- Need OL 4.5 -->
     <script src="ol-4.5.js" type="text/javascript"></script>
     <script src="https://cdn.rawgit.com/Viglino/OL3-AnimatedCluster/gh-pages/interaction/selectclusterinteraction.js"></script>
     <script src="https://cdn.rawgit.com/Viglino/OL3-AnimatedCluster/gh-pages/layer/animatedclusterlayer.js"></script>
-    <title>OpenLayers example</title>
+    <title>Mangaki Map</title>
   </head>
   <body>
     <div id="map" class="map">
@@ -188,7 +191,7 @@
               description = 'Utilisateur : ' + markers[0].get('name');
             } else if(markers[0].get('features') !== undefined) {
               first_element = markers[0].get('features')[0];
-              description = '<img src="' + first_element.get('poster') + '" />' + '<p><em>' + first_element.get('name') + '</em></p>';
+              description = '<img class="poster" src="' + first_element.get('poster') + '" />' + '<p><em>' + first_element.get('name') + '</em></p>';
             } else {
               description = '';
             }
@@ -201,13 +204,14 @@
       function changeMap(val) {
         if(val == 'als') {
           request.open("get", "points-als.json", true);
-          requestUsers.open("get", mangaki_server + "/api/user/positions/als?format=json", true);
+          requestUsers.open("get", mangaki_server + "/api/user/position/als?format=json", true);
         }
         else {
           request.open("get", "points-svd.json", true);
-          requestUsers.open("get", mangaki_server + "/api/user/positions/svd?format=json", true);
+          requestUsers.open("get", mangaki_server + "/api/user/position/svd?format=json", true);
         }
         request.send();
+        requestUsers.send();
       }
     </script>
     <aside id="viz">
